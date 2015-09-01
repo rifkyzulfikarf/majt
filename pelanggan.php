@@ -39,6 +39,7 @@ if (isset($_SESSION['majt-id'])) {
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 				<li><a href="#head" class="active">Home</a></li>
 				<li><a href="#pesanan">Daftar Pesanan</a></li>
+				<li><a href="#logout" id="logout">Logout</a></li>
 			</ul>
 		</div>
 	</div>
@@ -63,6 +64,9 @@ if (isset($_SESSION['majt-id'])) {
 	
 </section>
 
+<section class="section" id="logout">
+	
+</section>
 
 <div class="alert alert-danger flyover flyover-top" id="alert-failed"></div>
 <div class="alert alert-success flyover flyover-top" id="alert-success"></div>

@@ -32,7 +32,26 @@ $(document).ready(function() {
 	
 	$('#calendar').fullCalendar({
         // put your options and callbacks here
-    })
+    });
+	
+	$("#logout").click(function(){
+		$.ajax({
+			url: "assets/auxs/pelanggan_aux.php",
+			method: "POST",
+			cache: false,
+			dataType: "JSON",
+			data: {"apa" : "logout"},
+			success: function(eve) {
+				if (eve.status) {
+					window.location.href = "index.html";
+				}
+			},
+			error: function(err) {
+				console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+				alert("Gagal terkoneksi dengan server..");
+			}
+		});
+	});
 	
 });
 
