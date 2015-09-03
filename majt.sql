@@ -16,6 +16,32 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`majt` /*!40100 DEFAULT CHARACTER SET la
 
 USE `majt`;
 
+/*Table structure for table `booking` */
+
+DROP TABLE IF EXISTS `booking`;
+
+CREATE TABLE `booking` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `tgl` date DEFAULT NULL,
+  `id_pelanggan` bigint(20) DEFAULT NULL,
+  `id_gedung` bigint(20) DEFAULT NULL,
+  `nama_pemesan` varchar(50) DEFAULT NULL,
+  `alamat` text,
+  `provinsi` text,
+  `kota` text,
+  `kodepos` varchar(6) DEFAULT NULL,
+  `telp` varchar(15) DEFAULT NULL,
+  `waktu` varchar(1) DEFAULT NULL,
+  `harga` double DEFAULT NULL,
+  `konfirmasi` varchar(1) DEFAULT NULL,
+  `acc` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+/*Data for the table `booking` */
+
+insert  into `booking`(`id`,`tgl`,`id_pelanggan`,`id_gedung`,`nama_pemesan`,`alamat`,`provinsi`,`kota`,`kodepos`,`telp`,`waktu`,`harga`,`konfirmasi`,`acc`) values (1,'2015-09-03',1,1,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','1',22500000,'0','1'),(2,'2015-09-03',1,1,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',25000000,'0','1'),(3,'2015-09-03',1,2,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','1',6000000,'0','1'),(4,'2015-09-03',1,2,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',7000000,'0','1'),(5,'2015-09-03',1,3,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','1',5500000,'0','1'),(6,'2015-09-03',1,3,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',6500000,'0','1'),(7,'2015-09-04',1,2,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',7000000,'0','1'),(8,'2015-09-15',1,2,'Zulfikar','Surabaya','Jawa Timur ','Surabaya','25000','085641099333','2',7000000,'0','0'),(9,'2015-09-15',1,3,'Kadir Mubarak','Jl. Musi No 23','Sumatera Selatan ','Lampung','14045','085641099333','1',5500000,'0','0'),(10,'2015-09-15',1,3,'Budi Darmono','Jl. Sepanjang V No 51','Jawa Barat ','Cirebon','56789','085641099333','2',6500000,'0','0'),(11,'2015-09-17',1,1,'Teguh Prakoso','Jl Parang Barong','Jawa Tengah ','Semarang','15000','0247057367','1',22500000,'0','0'),(12,'2015-09-12',1,1,'Aji Jaya','Sampangan','Jawa Tengah ','Semarang','14045','08672663726','2',30000000,'0','0'),(13,'2015-09-20',1,2,'Ibu ibu PKK','Dimana','Aceh, D.I ','Aceh','30000','08347583421','1',8000000,'0','0');
+
 /*Table structure for table `gedung` */
 
 DROP TABLE IF EXISTS `gedung`;
@@ -67,11 +93,11 @@ CREATE TABLE `pelanggan` (
   `password` varchar(20) DEFAULT NULL,
   `status` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `pelanggan` */
 
-insert  into `pelanggan`(`id`,`nama`,`gender`,`alamat`,`email`,`telp`,`username`,`password`,`status`) values (1,'Rifky Zulfikar','L','Parangkusumo 1 No 30 Semarang','rifkyzulfikar92@gmail.com','085641099333','a','a','1');
+insert  into `pelanggan`(`id`,`nama`,`gender`,`alamat`,`email`,`telp`,`username`,`password`,`status`) values (1,'Rifky Zulfikar','L','Parangkusumo 1 No 30 Semarang','rifkyzulfikar92@gmail.com','085641099333','a','a','1'),(4,'Erlian','P','Tlogosari','erlianhusnaf@gmail.com','08562666717','erlian','erlian','1');
 
 /*Table structure for table `user` */
 
