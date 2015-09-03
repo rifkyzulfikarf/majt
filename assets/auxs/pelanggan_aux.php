@@ -157,6 +157,33 @@
 				
 				echo json_encode($arr);
 				break;
+			case "daftar-pesanan":
+				include "../../admin/inc/blob.php";
+				
+				$koneksi = new koneksi();
+				$collect = array();
+				$idPelanggan = $_SESSION['majt-id'];
+				
+				$query = "SELECT `booking`.`id`, `booking`.`tgl`, `booking`.`id_pelanggan`, `booking`.`id_gedung`, `booking`.`nama_pemesan`, 
+						`booking`.`alamat`, `booking`.`provinsi`, `booking`.`kota`, `booking`.`kodepos`, `booking`.`telp`, `booking`.`waktu`, 
+						`booking`.`harga`, `booking`.`konfirmasi`, `booking`.`acc`, `gedung`.`nama` FROM `booking` INNER JOIN `gedung` 
+						ON (`booking`.`id_gedung` = `gedung`.`id`) WHERE `booking`.`id_pelanggan` = '$idPelanggan';";
+				
+				if ($result = $koneksi->runQuery($query)) {
+					while ($rs = $result->fetch_array()) {
+						$detail = array();
+						array_push($detail, $rs["tgl"]);
+						array_push($detail, $rs["nama_pemesan"]);
+						array_push($detail, $rs["nama"]);
+						array_push($detail, ($rs["waktu"]=="1")?"Siang":"Malam");
+						array_push($detail, "Rp ".number_format($rs["harga"], 0, ",", "."));
+						array_push($detail, "");
+						array_push($collect, $detail);
+						unset($detail);
+					}
+				}
+				echo json_encode(array("data"=>$collect));
+				break;
 		}
 	}
 ?>

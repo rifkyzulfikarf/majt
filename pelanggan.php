@@ -19,6 +19,10 @@ if (isset($_SESSION['majt-id'])) {
 	
 	<!-- Full Calendar styles -->
 	<link rel="stylesheet" href="assets/css/fullcalendar.min.css">
+	
+	<!-- Datatables styles -->
+	<link rel="stylesheet" href="assets/css/jquery.dataTables.css">
+	<link rel="stylesheet" href="assets/css/dataTables.bootstrap.css">
 
 	<!-- Custom styles -->
 	<link rel="stylesheet" href="assets/css/magister.css">
@@ -38,7 +42,7 @@ if (isset($_SESSION['majt-id'])) {
 			<!-- <a data-toggle="dropdown" href="#">Dropdown trigger</a> -->
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 				<li><a href="#head" class="active" id="menu-home">Home</a></li>
-				<li><a href="#pesanan">Daftar Pesanan</a></li>
+				<li><a href="#pesanan" id="menu-pesanan">Daftar Pesanan</a></li>
 				<li><a href="#logout" id="logout">Logout</a></li>
 			</ul>
 		</div>
@@ -127,7 +131,29 @@ if (isset($_SESSION['majt-id'])) {
 
 <!-- Second (Daftar Pesanan) section -->
 <section class="section" id="pesanan">
-	
+	<div class="container">
+		<div class="row" id="booking-form-box">
+			<div class="col-sm-10 col-sm-offset-2">
+				<h2 class="text-center title">Daftar Pemesanan</h2>
+				<table class="table table-bordered" id="tabel-pesanan">
+					<thead>
+						<tr>
+							<th>Tanggal</th>
+							<th>Nama Pemesan</th>
+							<th>Gedung</th>
+							<th>Waktu</th>
+							<th>Harga</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						
+					</tbody>
+					<tfoot></tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
 </section>
 
 <section class="section" id="logout">
@@ -143,6 +169,8 @@ if (isset($_SESSION['majt-id'])) {
 <script src="assets/js/modernizr.custom.72241.js"></script>
 <script src="assets/js/moment.js"></script>
 <script src="assets/js/fullcalendar.min.js"></script>
+<script src="assets/js/dataTables.bootstrap.js"></script>
+<script src="assets/js/jquery.dataTables.min.js"></script>
 <!-- Custom template scripts -->
 <script src="assets/js/pelanggan.js"></script>
 </body>

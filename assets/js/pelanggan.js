@@ -73,6 +73,18 @@ $(document).ready(function() {
 		}
     });
 	
+	var tabelpesanan = $("#tabel-pesanan").DataTable({
+		ordering: false,
+		autoWidth: true,
+		ajax:{
+			url : "assets/auxs/pelanggan_aux.php",
+			type : "POST",
+			data : function(d) {
+				d.apa = "daftar-pesanan";
+			}
+		}
+	});
+	
 	$("#logout").click(function(){
 		$.ajax({
 			url: "assets/auxs/pelanggan_aux.php",
@@ -182,6 +194,10 @@ $(document).ready(function() {
 			}
 		});
 		
+	});
+	
+	$("#menu-pesanan").click(function(){
+		tabelpesanan.ajax.reload();
 	});
 	
 });
