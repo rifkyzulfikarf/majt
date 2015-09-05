@@ -11,6 +11,10 @@ $(document).ready(function() {
 	
 	init();
 	
+	$("#tgltransfer").datepicker({
+		dateFormat : "yy-mm-dd"
+	});
+	
 	function init() {
 		$("#orderable-box").hide();
 		$("#booking-form-box").hide();
@@ -198,6 +202,79 @@ $(document).ready(function() {
 	
 	$("#menu-pesanan").click(function(){
 		tabelpesanan.ajax.reload();
+	});
+	
+	$("#tabel-pesanan").on("click", ".btn-confirm", function(ev){
+		ev.preventDefault();
+		$("#banktransfer").val("");
+		$("#atasnama").val("");
+		$("#jmltransfer").val("");
+		$("#keterangan").val("");
+		$('#modal-confirm').modal('show');
+		$("#idpesanan").val($(this).data("id"));
+	});
+	
+	$("#btn-simpan-confirm").click(function(ev){
+		ev.preventDefault();
+		
+		var idpesan = $("#idpesanan").val();
+		var tgl = $("#tgltransfer").val();
+		var bank = $("#banktransfer").val();
+		var nama = $("#atasnama").val();
+		var jml = $("#jmltransfer").val();
+		var ket = $("#keterangan").val();
+		
+		$.ajax({
+			url: "assets/auxs/pelanggan_aux.php",
+			method: "POST",
+			cache: false,
+			dataType: "JSON",
+			data: {"apa" : "simpan-konfirmasi", "idpesan" : idpesan, "tgl" : tgl, "bank" : bank, "nama" : nama, "jml" : jml, "ket" : ket},
+			success: function(eve) {
+				if (eve.status) {
+					
+					$('#alert-success').text(eve.msg);
+					if ( !$('#alert-success').is( '.in' ) ) {
+						$('#alert-success').addClass('in');
+
+						setTimeout(function() {
+							$('#alert-success').removeClass('in');
+						}, 1800);
+					}
+					
+					$(".btn-close-modal").click();
+					$('#modal-upload-bukti').modal('show');
+				} else {
+					$('#alert-failed').text(eve.msg);
+					if ( !$('#alert-failed').is( '.in' ) ) {
+						$('#alert-failed').addClass('in');
+
+						setTimeout(function() {
+							$('#alert-failed').removeClass('in');
+						}, 1800);
+					}
+				}
+			},
+			error: function(err) {
+				console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+				alert("Gagal terkoneksi dengan server..");
+			}
+		});
+	});
+	
+	var myDropzone = $("#dropzone").dropzone({ 
+		url: "assets/auxs/upload.php",
+		maxFilesize: 1,
+		acceptedFiles: "image/*",
+		init: function () {
+			this.on("sending", function(file, xhr, data) {
+				data.append("id", $('#idpesanan').val());
+			});
+			this.on("success", function(file, response) {
+				$(".btn-close-modal").click();
+				tabelpesanan.ajax.reload();
+			});
+		}
 	});
 	
 });

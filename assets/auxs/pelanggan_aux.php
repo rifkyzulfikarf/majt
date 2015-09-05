@@ -116,7 +116,6 @@
 				}
 				break;
 			case "simpan-booking":
-				
 				include "../../admin/inc/blob.php";
 				$arr = array();
 				
@@ -171,18 +170,70 @@
 				
 				if ($result = $koneksi->runQuery($query)) {
 					while ($rs = $result->fetch_array()) {
+						
+						if ($rs["konfirmasi"] == "0") {
+							$aksi = "<a class='btn btn-default btn-sm btn-confirm' role='button' data-id='".$rs["id"]."'><i class='fa fa-check-square-o'></i></a> ";
+						} else {
+							$aksi = "";
+						}
+						
+						if ($rs["acc"] == "0") {
+							$acc = "Belum";
+						} elseif ($rs["acc"] == "1") {
+							$acc = "Ya";
+						} else {
+							$acc = "Tidak";
+						}
+						
+						$aksi .= "<a class='btn btn-default btn-sm' role='button' data-id='".$rs["id"]."'><i class='fa fa-cutlery'></i></a>";
+					
 						$detail = array();
 						array_push($detail, $rs["tgl"]);
 						array_push($detail, $rs["nama_pemesan"]);
-						array_push($detail, $rs["nama"]);
-						array_push($detail, ($rs["waktu"]=="1")?"Siang":"Malam");
+						array_push($detail, ($rs["waktu"]=="1")?$rs["nama"]." "."Siang":$rs["nama"]." "."Malam");
 						array_push($detail, "Rp ".number_format($rs["harga"], 0, ",", "."));
-						array_push($detail, "");
+						array_push($detail, $acc);
+						array_push($detail, $aksi);
 						array_push($collect, $detail);
 						unset($detail);
 					}
 				}
 				echo json_encode(array("data"=>$collect));
+				break;
+			case "simpan-konfirmasi":
+				include "../../admin/inc/blob.php";
+				$arr = array();
+				
+				if (isset($_POST['idpesan']) && $_POST['idpesan'] != "" && isset($_POST['tgl']) && $_POST['tgl'] != "" && 
+				isset($_POST['bank']) && $_POST['bank'] != "" && isset($_POST['nama']) && $_POST['nama'] != "" && 
+				isset($_POST['jml']) && $_POST['jml'] != "") {
+					
+					$idpesan = $_POST['idpesan'];
+					$tgl = $_POST['tgl'];
+					$bank = $_POST['bank'];
+					$nama = $_POST['nama'];
+					$jml = $_POST['jml'];
+					$ket = (isset($_POST['ket']))?$_POST['ket']:"-";
+					
+					$koneksi = new koneksi();
+					
+					$query = "INSERT INTO konfirmasi(id_booking, tgl, bank, nama, jumlah, keterangan, img) VALUES('$idpesan', '$tgl', '$bank', '$nama', '$jml', '$ket', '-');";
+					$query .= "UPDATE booking SET konfirmasi = '1' WHERE id = '$idpesan';";
+					
+					if ($result = $koneksi->runMultipleQueries($query)) {
+						$arr['status']=TRUE;
+						$arr['msg']="Konfirmasi berhasil..";
+					} else {
+						$arr['status']=FALSE;
+						$arr['msg']="Konfirmasi gagal.. Ada kesalahan dengan sistem..";
+					}
+					
+				} else {
+					$arr['status']=FALSE;
+					$arr['msg']="Harap isi data konfirmasi dengan lengkap..";
+				}
+				
+				echo json_encode($arr);
 				break;
 		}
 	}

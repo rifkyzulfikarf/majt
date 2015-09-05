@@ -23,6 +23,12 @@ if (isset($_SESSION['majt-id'])) {
 	<!-- Datatables styles -->
 	<link rel="stylesheet" href="assets/css/jquery.dataTables.css">
 	<link rel="stylesheet" href="assets/css/dataTables.bootstrap.css">
+	
+	<!-- jQuery UI styles -->
+	<link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+	
+	<!-- Dropzone JS styles -->
+	<link rel="stylesheet" href="assets/css/dropzone.min.css">
 
 	<!-- Custom styles -->
 	<link rel="stylesheet" href="assets/css/magister.css">
@@ -61,42 +67,7 @@ if (isset($_SESSION['majt-id'])) {
 		</div>
 		
 		<div class="row" id="orderable-box">
-			<div class="col-sm-3 col-sm-offset-2">
-				<div class="thumbnail">
-					<img src="assets/images/gedung/1.jpg" alt="">
-					<div class="caption">
-						<h3>Convention Hall</h3>
-						<p>Standing party 2000 orang,  theater 1500 orang, round table 500 orang</p>
-						<p>DP Rp 2.000.000</p>
-						<p>Siang Rp 22.500.000</p>
-						<p>Malam Rp 25.000.000</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="thumbnail">
-					<img src="assets/images/gedung/2.jpg" alt="">
-					<div class="caption">
-						<h3>Gedung Perpustakaan</h3>
-						<p>Standing party 600 orang</p>
-						<p>DP Rp 2.000.000</p>
-						<p>Siang Rp 6.000.000</p>
-						<p>Malam Rp 7.000.000</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="thumbnail">
-					<img src="assets/images/gedung/3.jpg" alt="">
-					<div class="caption">
-						<h3>Office Hall Lt. 2</h3>
-						<p>Standing party 700 orang</p>
-						<p>DP Rp 2.000.000</p>
-						<p>Siang Rp 7.500.000</p>
-						<p>Malam Rp 8.500.000</p>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 		
 		<div class="row" id="booking-form-box">
@@ -139,10 +110,10 @@ if (isset($_SESSION['majt-id'])) {
 					<thead>
 						<tr>
 							<th>Tanggal</th>
-							<th>Nama Pemesan</th>
+							<th>Pemesan</th>
 							<th>Gedung</th>
-							<th>Waktu</th>
 							<th>Harga</th>
+							<th>Acc</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -163,14 +134,81 @@ if (isset($_SESSION['majt-id'])) {
 <div class="alert alert-danger flyover flyover-top" id="alert-failed"></div>
 <div class="alert alert-success flyover flyover-top" id="alert-success"></div>
 
+<div class="modal fade" id="modal-confirm">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Konfirmasi Pembayaran</h4>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" name="idpesanan" id="idpesanan">
+				<form action="#" id="form-input" class="form-horizontal" method="POST">
+					<div class="form-group">
+						<label for="tgltransfer" class="col-sm-3 control-label">Tanggal Transfer</label>
+						<div class="col-sm-9">
+							<input type="text" name="tgltransfer" id="tgltransfer" class="form-control " placeholder="Tanggal Transfer">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="banktransfer" class="col-sm-3 control-label">Dari Bank</label>
+						<div class="col-sm-9">
+							<input type="text" name="banktransfer" id="banktransfer" class="form-control " placeholder="Bank Transfer">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="atasnama" class="col-sm-3 control-label">Atas Nama</label>
+						<div class="col-sm-9">
+							<input type="text" name="atasnama" id="atasnama" class="form-control " placeholder="Atas Nama">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="jmltransfer" class="col-sm-3 control-label">Jumlah Transfer</label>
+						<div class="col-sm-9">
+							<input type="text" name="jmltransfer" id="jmltransfer" class="form-control " placeholder="Jumlah Transfer">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="keterangan" class="col-sm-3 control-label">Keterangan</label>
+						<div class="col-sm-9">
+							<input type="text" name="keterangan" id="keterangan" class="form-control " placeholder="Keterangan">
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" id="btn-simpan-confirm">Simpan dan Upload Bukti Bayar</button>
+				<button type="button" class="btn btn-default btn-close-modal" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal-upload-bukti">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Upload Bukti Bayar</h4>
+			</div>
+			<div class="modal-body">
+				<div id="dropzone" class="dropzone"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default btn-close-modal" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- Load js libs only when the page is loaded. -->
 <script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery-ui.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/modernizr.custom.72241.js"></script>
 <script src="assets/js/moment.js"></script>
 <script src="assets/js/fullcalendar.min.js"></script>
 <script src="assets/js/dataTables.bootstrap.js"></script>
 <script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/dropzone.min.js"></script>
 <!-- Custom template scripts -->
 <script src="assets/js/pelanggan.js"></script>
 </body>
