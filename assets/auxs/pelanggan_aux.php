@@ -62,7 +62,8 @@
 					
 					if ($resGedung = $koneksi->runQuery($qGedung)) {
 						while ($rsGedung = $resGedung->fetch_array()) {
-							if ($i == 1) { echo "<div class='col-sm-3 col-sm-offset-2'>"; } else { echo "<div class='col-sm-3'>"; }
+							if (($i % 2) == 1) { echo "<div class='row'>";}
+							if (($i % 2) == 1) { echo "<div class='col-sm-4 col-sm-offset-2'>"; } else { echo "<div class='col-sm-4'>"; }
 							echo "<div class='thumbnail'>";
 							echo "<img src='assets/images/gedung/".$rsGedung['img']."' alt=''>";
 							echo "<div class='caption'>";
@@ -109,10 +110,10 @@
 							}
 							
 							echo "</div></div></div>";
+							if (($i % 2) == 0) { echo "</div>";}
 							$i++;
 						}
 					}
-					
 				}
 				break;
 			case "simpan-booking":
@@ -181,11 +182,17 @@
 							$acc = "Belum";
 						} elseif ($rs["acc"] == "1") {
 							$acc = "Ya";
+							
+							if ($resCek = $koneksi->runQuery("SELECT COUNT(id) FROM booking_catering WHERE id_booking = '".$rs["id"]."'")) {
+								$rsCek = $resCek->fetch_array();
+								if ($rsCek[0] == 0) {
+									$aksi .= "<a class='btn btn-default btn-sm btn-show-catering' role='button' data-id='".$rs["id"]."' data-tgl='".$rs["tgl"]."'><i class='fa fa-cutlery'></i></a>";
+								}
+							}
+							
 						} else {
 							$acc = "Tidak";
 						}
-						
-						$aksi .= "<a class='btn btn-default btn-sm' role='button' data-id='".$rs["id"]."'><i class='fa fa-cutlery'></i></a>";
 					
 						$detail = array();
 						array_push($detail, $rs["tgl"]);
@@ -231,6 +238,83 @@
 				} else {
 					$arr['status']=FALSE;
 					$arr['msg']="Harap isi data konfirmasi dengan lengkap..";
+				}
+				
+				echo json_encode($arr);
+				break;
+			case "show-catering":
+				if (isset($_POST['tgl']) && $_POST['tgl'] != "" && isset($_POST['id']) && $_POST['id'] != "") {
+					include "../../admin/inc/blob.php";
+					
+					$koneksi = new koneksi();
+					$id = $_POST['id'];
+					$tgl = $_POST['tgl'];
+					
+					$i = 1;
+					
+					$qCatering = "SELECT * FROM catering";
+					
+					if ($resCatering = $koneksi->runQuery($qCatering)) {
+						while ($rsCatering = $resCatering->fetch_array()) {
+							
+							if (($i % 2) == 1) { echo "<div class='row'>";}
+							if (($i % 2) == 1) { echo "<div class='col-sm-4 col-sm-offset-2'>"; } else { echo "<div class='col-sm-4'>"; }
+							echo "<div class='thumbnail'>";
+							echo "<img src='assets/images/catering/".$rsCatering['img']."' alt=''>";
+							echo "<div class='caption'>";
+							echo "<h3>".$rsCatering['nama']."</h3>";
+							echo "<p>".$rsCatering['alamat']."</p>";
+							echo "<p>".$rsCatering['telepon']."</p>";
+							echo "<p>DP Rp. ".number_format($rsCatering['dp'], 0, ",", ".")."</p>";
+							
+							if ($rsCatering["link"] != "-") {
+								echo "<p>Website <a href='".$rsCatering['link']."' target='blank'>".$rsCatering['link']."</a></p>";
+							}
+							
+							if ($rsCatering["brosur"] != "-") {
+								echo "<p>Brosur Harga <a href='assets/images/catering/brosur/".$rsCatering['brosur']."' target='blank'>Download</a></p>";
+							}
+							
+							$qCek = "SELECT COUNT(id_catering) FROM jadwal_catering WHERE tgl = '$tgl' AND id_catering = '".$rsCatering['id']."'";
+							if ($resCek = $koneksi->runQuery($qCek)) {
+								$rsCek = $resCek->fetch_array();
+								if ($rsCek[0] == 0) {
+									echo "<p>Status : Tersedia -> <a class='pesan-catering' data-idbooking='".$id."' data-idcatering='".$rsCatering['id']."' data-namacatering='".$rsCatering['nama']."' data-tgl='".$tgl."'>Pesan</a></p>";
+								} else {
+									echo "<p>Status : Tidak tersedia pada tanggal pesan gedung</p>";
+								}
+							}
+							
+							echo "</div></div></div>";
+							if (($i % 2) == 0) { echo "</div>";}
+							$i++;
+						}
+					}
+				}
+				break;
+			case "simpan-catering":
+				include "../../admin/inc/blob.php";
+				$arr = array();
+				
+				if (isset($_POST['idbooking']) && $_POST['idbooking'] != "" && isset($_POST['tgl']) && $_POST['tgl'] != "" && 
+				isset($_POST['idcatering']) && $_POST['idcatering'] != "") {
+					
+					$idbooking = $_POST['idbooking'];
+					$tgl = $_POST['tgl'];
+					$idcatering = $_POST['idcatering'];
+					
+					$koneksi = new koneksi();
+					
+					$query = "INSERT INTO booking_catering(id_booking, id_catering) VALUES('$idbooking', '$idcatering');";
+					$query .= "INSERT INTO jadwal_catering VALUES('$idcatering', '$tgl');";
+					
+					if ($result = $koneksi->runMultipleQueries($query)) {
+						$arr['status']=TRUE;
+						$arr['msg']="Simpan catering berhasil..";
+					} else {
+						$arr['status']=FALSE;
+						$arr['msg']="Simpan catering gagal.. Ada kesalahan dengan sistem..";
+					}
 				}
 				
 				echo json_encode($arr);

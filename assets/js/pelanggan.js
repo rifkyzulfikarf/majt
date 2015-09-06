@@ -17,6 +17,7 @@ $(document).ready(function() {
 	
 	function init() {
 		$("#orderable-box").hide();
+		$("#catering-box").hide();
 		$("#booking-form-box").hide();
 		$.ajax({
 			url: 'assets/auxs/pelanggan_aux.php',
@@ -201,7 +202,10 @@ $(document).ready(function() {
 	});
 	
 	$("#menu-pesanan").click(function(){
-		tabelpesanan.ajax.reload();
+		$("#catering-box").fadeOut(section_hide_time, function(){
+			$("#daftar-pesanan-box").fadeIn(section_show_time);
+			tabelpesanan.ajax.reload();
+		});
 	});
 	
 	$("#tabel-pesanan").on("click", ".btn-confirm", function(ev){
@@ -273,6 +277,79 @@ $(document).ready(function() {
 			this.on("success", function(file, response) {
 				$(".btn-close-modal").click();
 				tabelpesanan.ajax.reload();
+			});
+		}
+	});
+	
+	$("#tabel-pesanan").on("click", ".btn-show-catering", function(ev){
+		ev.preventDefault();
+		$("#catering-box").empty();
+		var id = $(this).data("id");
+		var tgl = $(this).data("tgl");
+		$("#daftar-pesanan-box").fadeOut(section_hide_time, function(){
+			$("#catering-box").fadeIn(section_show_time, function(){
+				$.ajax({
+					url: "assets/auxs/pelanggan_aux.php",
+					method: "POST",
+					cache: false,
+					data: {"apa" : "show-catering", "tgl" : tgl, "id" : id},
+					success: function(html) {
+						$("#catering-box").html(html);
+					},
+					error: function(err) {
+						console.log(html);
+						alert("Gagal terkoneksi dengan server..");
+					}
+				});
+			});
+		});
+	});
+	
+	$("#catering-box").on("click", ".pesan-catering", function(ev){
+		ev.preventDefault();
+		
+		var idcatering = $(this).data("idcatering");
+		var idbooking = $(this).data("idbooking");
+		var namacatering = $(this).data("namacatering");
+		var tgl = $(this).data("tgl");
+		
+		console.log(idbooking+"-"+idcatering+"-"+namacatering+"-"+tgl);
+		
+		if (confirm('Setuju pesan '+ namacatering +' ?')) {
+			$.ajax({
+				url: "assets/auxs/pelanggan_aux.php",
+				method: "POST",
+				cache: false,
+				dataType: "JSON",
+				data: {"apa" : "simpan-catering", "idbooking" : idbooking, "tgl" : tgl, "idcatering" : idcatering},
+				success: function(eve) {
+					if (eve.status) {
+						
+						$('#alert-success').text(eve.msg);
+						if ( !$('#alert-success').is( '.in' ) ) {
+							$('#alert-success').addClass('in');
+
+							setTimeout(function() {
+								$('#alert-success').removeClass('in');
+							}, 1800);
+						}
+						
+						$("#menu-pesanan").click();
+					} else {
+						$('#alert-failed').text(eve.msg);
+						if ( !$('#alert-failed').is( '.in' ) ) {
+							$('#alert-failed').addClass('in');
+
+							setTimeout(function() {
+								$('#alert-failed').removeClass('in');
+							}, 1800);
+						}
+					}
+				},
+				error: function(err) {
+					console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+					alert("Gagal terkoneksi dengan server..");
+				}
 			});
 		}
 	});

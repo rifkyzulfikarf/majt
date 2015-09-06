@@ -103,7 +103,7 @@ if (isset($_SESSION['majt-id'])) {
 <!-- Second (Daftar Pesanan) section -->
 <section class="section" id="pesanan">
 	<div class="container">
-		<div class="row" id="booking-form-box">
+		<div class="row" id="daftar-pesanan-box">
 			<div class="col-sm-10 col-sm-offset-2">
 				<h2 class="text-center title">Daftar Pemesanan</h2>
 				<table class="table table-bordered" id="tabel-pesanan">
@@ -123,6 +123,10 @@ if (isset($_SESSION['majt-id'])) {
 					<tfoot></tfoot>
 				</table>
 			</div>
+		</div>
+		
+		<div class="row" id="catering-box">
+			
 		</div>
 	</div>
 </section>
