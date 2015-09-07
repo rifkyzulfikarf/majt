@@ -4,6 +4,7 @@ var current_item = 0;
 // few settings
 var section_hide_time = 600;
 var section_show_time = 600;
+var json_events;
 
 // jQuery stuff
 $(document).ready(function() {
@@ -12,7 +13,25 @@ $(document).ready(function() {
 	
 	function init() {
 		$("#signup-box").hide();
+		$("#box-denah").hide();
+		$("#box-gedung").hide();
+		$("#box-video").hide();
+		
+		$.ajax({
+			url: 'assets/auxs/index_aux.php',
+			type: 'POST',
+			data: {"apa" : "calendar-data"},
+			async: false,
+			success: function(response){
+				json_events = response;
+			}
+		});
 	};
+	
+	var calendar = $('#calendar').fullCalendar({
+        selectable: true,
+		events: JSON.parse(json_events)
+    });
 	
 	// Switch section
 	$("a", '.mainmenu').click(function() 
@@ -146,6 +165,61 @@ $(document).ready(function() {
 			}
 		}
 		
+	});
+	
+	$("#menu-home").click(function(){
+		$.ajax({
+			url: 'assets/auxs/pelanggan_aux.php',
+			type: 'POST',
+			data: {"apa" : "calendar-data"},
+			async: false,
+			success: function(response){
+				json_events = response;
+			}
+		});
+		calendar.fullCalendar('removeEvents');
+		calendar.fullCalendar('addEventSource', JSON.parse(json_events));
+		calendar.fullCalendar('rerenderEvents');
+	});
+	
+	$("#btn-show-sejarah").click(function(){
+		$("#box-denah").fadeOut(section_hide_time, function(){
+			$("#box-gedung").fadeOut(section_hide_time, function(){
+				$("#box-video").fadeOut(section_hide_time, function(){
+					$("#box-sejarah").fadeIn(section_hide_time);
+				})
+			});
+		});
+	});
+	
+	$("#btn-show-denah").click(function(){
+		$("#box-sejarah").fadeOut(section_hide_time, function(){
+			$("#box-gedung").fadeOut(section_hide_time, function(){
+				$("#box-video").fadeOut(section_hide_time, function(){
+					$("#box-denah").fadeIn(section_hide_time);
+				})
+			});
+		});
+	});
+	
+	$("#btn-show-gedung").click(function(){
+		$("#box-sejarah").fadeOut(section_hide_time, function(){
+			$("#box-denah").fadeOut(section_hide_time, function(){
+				$("#box-video").fadeOut(section_hide_time, function(){
+					$("#box-gedung").fadeIn(section_hide_time);
+				})
+			});
+		});
+	});
+	
+	$("#btn-show-video").click(function(){
+		$("#box-sejarah").fadeOut(section_hide_time, function(){
+			$("#box-denah").fadeOut(section_hide_time, function(){
+				$("#box-gedung").fadeOut(section_hide_time, function(){
+					$("#box-video").fadeIn(section_hide_time);
+				})
+			});
+		});
 	});
 	
 });

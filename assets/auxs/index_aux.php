@@ -64,6 +64,44 @@
 				
 				echo json_encode($arr);
 				break;
+			case "calendar-data":
+				include "../../admin/inc/blob.php";
+				
+				$koneksi = new koneksi();
+				$events = array();
+				
+				//Lihat dulu jumlah gedung yang ada
+				if ($result = $koneksi->runQuery("SELECT COUNT(id) FROM gedung")) {
+					$rs = $result->fetch_array();
+					$jumlahGedung = $rs[0];
+				}
+				
+				$jumlahGedung = $jumlahGedung * 2;
+				
+				if ($result = $koneksi->runQuery("SELECT tgl, COUNT(id) FROM booking WHERE acc <> '2' GROUP BY tgl ASC")) {
+					while ($rs = $result->fetch_array()) {
+						$e = array();
+						
+						$e['start'] = $rs['tgl'];
+						$e['end'] = $rs['tgl'];
+						$e['allDay'] = true;
+						
+						if ($rs[1] == $jumlahGedung) {
+							$e['title'] = "Penuh";
+							$e['color'] = "red";
+						} else if ($rs[1] < $jumlahGedung) {
+							$e['title'] = ($jumlahGedung - $rs[1])." ruangan tersedia.";
+							$e['color'] = "blue";
+						}
+						
+						
+							
+						array_push($events, $e);
+					}
+				}
+				
+				echo json_encode($events);
+				break;
 		}
 	}
 ?>

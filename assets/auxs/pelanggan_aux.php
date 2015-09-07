@@ -25,7 +25,7 @@
 				
 				$jumlahGedung = $jumlahGedung * 2;
 				
-				if ($result = $koneksi->runQuery("SELECT tgl, COUNT(id) FROM booking GROUP BY tgl ASC")) {
+				if ($result = $koneksi->runQuery("SELECT tgl, COUNT(id) FROM booking WHERE acc <> '2' GROUP BY tgl ASC")) {
 					while ($rs = $result->fetch_array()) {
 						$e = array();
 						

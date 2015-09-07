@@ -44,7 +44,7 @@ CREATE TABLE `booking` (
 
 /*Data for the table `booking` */
 
-insert  into `booking`(`id`,`tgl`,`id_pelanggan`,`id_gedung`,`nama_pemesan`,`alamat`,`provinsi`,`kota`,`kodepos`,`telp`,`waktu`,`harga`,`konfirmasi`,`acc`) values (1,'2015-09-03',1,1,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','1',22500000,'1','1'),(2,'2015-09-03',1,1,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',25000000,'1','1'),(3,'2015-09-03',1,2,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','1',6000000,'0','0'),(4,'2015-09-03',1,2,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',7000000,'0','0'),(5,'2015-09-03',1,3,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','1',5500000,'0','0'),(6,'2015-09-03',1,3,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',6500000,'0','0'),(7,'2015-09-04',1,2,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',7000000,'1','2'),(8,'2015-09-15',1,2,'Zulfikar','Surabaya','Jawa Timur ','Surabaya','25000','085641099333','2',7000000,'0','0'),(9,'2015-09-15',1,3,'Kadir Mubarak','Jl. Musi No 23','Sumatera Selatan ','Lampung','14045','085641099333','1',5500000,'0','0'),(10,'2015-09-15',1,3,'Budi Darmono','Jl. Sepanjang V No 51','Jawa Barat ','Cirebon','56789','085641099333','2',6500000,'1','1'),(11,'2015-09-17',1,1,'Teguh Prakoso','Jl Parang Barong','Jawa Tengah ','Semarang','15000','0247057367','1',22500000,'1','0'),(12,'2015-09-12',1,1,'Aji Jaya','Sampangan','Jawa Tengah ','Semarang','14045','08672663726','2',30000000,'1','0'),(13,'2015-09-20',1,2,'Ibu ibu PKK','Dimana','Aceh, D.I ','Aceh','30000','08347583421','1',8000000,'0','0');
+insert  into `booking`(`id`,`tgl`,`id_pelanggan`,`id_gedung`,`nama_pemesan`,`alamat`,`provinsi`,`kota`,`kodepos`,`telp`,`waktu`,`harga`,`konfirmasi`,`acc`) values (1,'2015-09-03',1,1,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','1',22500000,'1','1'),(2,'2015-09-03',1,1,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',25000000,'1','1'),(3,'2015-09-03',1,2,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','1',6000000,'0','0'),(4,'2015-09-03',1,2,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',7000000,'0','0'),(5,'2015-09-03',1,3,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','1',5500000,'0','0'),(6,'2015-09-03',1,3,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',6500000,'0','0'),(7,'2015-09-04',1,2,'Rifky','Semarang','Jawa Tengah','Semarang','15000','085641099333','2',7000000,'1','2'),(8,'2015-09-15',1,2,'Zulfikar','Surabaya','Jawa Timur ','Surabaya','25000','085641099333','2',7000000,'1','2'),(9,'2015-09-15',1,3,'Kadir Mubarak','Jl. Musi No 23','Sumatera Selatan ','Lampung','14045','085641099333','1',5500000,'0','0'),(10,'2015-09-15',1,3,'Budi Darmono','Jl. Sepanjang V No 51','Jawa Barat ','Cirebon','56789','085641099333','2',6500000,'1','1'),(11,'2015-09-17',1,1,'Teguh Prakoso','Jl Parang Barong','Jawa Tengah ','Semarang','15000','0247057367','1',22500000,'1','1'),(12,'2015-09-12',1,1,'Aji Jaya','Sampangan','Jawa Tengah ','Semarang','14045','08672663726','2',30000000,'1','1'),(13,'2015-09-20',1,2,'Ibu ibu PKK','Dimana','Aceh, D.I ','Aceh','30000','08347583421','1',8000000,'0','0');
 
 /*Table structure for table `booking_catering` */
 
@@ -79,7 +79,7 @@ CREATE TABLE `catering` (
   `brosur` text,
   `link` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 /*Data for the table `catering` */
 
@@ -96,11 +96,11 @@ CREATE TABLE `gedung` (
   `dp` double DEFAULT NULL,
   `img` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `gedung` */
 
-insert  into `gedung`(`id`,`nama`,`kapasitas`,`dp`,`img`) values (1,'Convention Hall','Standing party 2000 orang, theater 1500 orang, round table 500 orang',2000000,'1.jpg'),(2,'Gedung Perpustakaan','Standing party 600 orang',2000000,'2.jpg'),(3,'Office Hall Lt. 2','Standing party 700 orang',2000000,'3.jpg');
+insert  into `gedung`(`id`,`nama`,`kapasitas`,`dp`,`img`) values (1,'Convention Hall','Standing party 2000 orang, theater 1500 orang, round table 500 orang',2000000,'1.jpg'),(2,'Gedung Perpustakaan','Standing party 600 orang',2000000,'2.jpg'),(3,'Office Hall Lt. 2','Standing party 700 orang',2000000,'3.jpg'),(4,'Tes2','Tes2',2500000,'-'),(5,'Tes','Tes',1500000,'-');
 
 /*Table structure for table `harga_gedung` */
 
@@ -152,11 +152,11 @@ CREATE TABLE `konfirmasi` (
   PRIMARY KEY (`id`),
   KEY `FK_konfirmasi_id_booking` (`id_booking`),
   CONSTRAINT `FK_konfirmasi_id_booking` FOREIGN KEY (`id_booking`) REFERENCES `booking` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `konfirmasi` */
 
-insert  into `konfirmasi`(`id`,`id_booking`,`tgl`,`bank`,`nama`,`jumlah`,`keterangan`,`img`) values (1,1,'2015-09-05','BCA','Rifky',2000000,'','-'),(2,2,'2015-09-05','BCA','Rifky',2000000,'','-'),(3,11,'2015-09-05','Mandiri','Rifky',2000000,'ini keterangan','82647705.jpg'),(4,12,'2015-09-05','CIMB Niaga','Erlian',2000000,'','26803589.jpg'),(5,7,'2015-09-06','Bank Jateng','Jono',2000000,'','-'),(6,10,'2015-09-06','BJB','Shela Mariana',2000000,'','20159912.jpg');
+insert  into `konfirmasi`(`id`,`id_booking`,`tgl`,`bank`,`nama`,`jumlah`,`keterangan`,`img`) values (1,1,'2015-09-05','BCA','Rifky',2000000,'','-'),(2,2,'2015-09-05','BCA','Rifky',2000000,'','-'),(3,11,'2015-09-05','Mandiri','Rifky',2000000,'ini keterangan','82647705.jpg'),(4,12,'2015-09-05','CIMB Niaga','Erlian',2000000,'','26803589.jpg'),(5,7,'2015-09-06','Bank Jateng','Jono',2000000,'','-'),(6,10,'2015-09-06','BJB','Shela Mariana',2000000,'','20159912.jpg'),(7,8,'2015-09-07','BankJono','La mbuh',2000000,'ra ngerti ik','-');
 
 /*Table structure for table `pelanggan` */
 
@@ -177,7 +177,7 @@ CREATE TABLE `pelanggan` (
 
 /*Data for the table `pelanggan` */
 
-insert  into `pelanggan`(`id`,`nama`,`gender`,`alamat`,`email`,`telp`,`username`,`password`,`status`) values (1,'Rifky Zulfikar','L','Parangkusumo 1 No 30 Semarang','rifkyzulfikar92@gmail.com','085641099333','a','a','1'),(4,'Erlian','P','Tlogosari','erlianhusnaf@gmail.com','08562666717','erlian','erlian','1');
+insert  into `pelanggan`(`id`,`nama`,`gender`,`alamat`,`email`,`telp`,`username`,`password`,`status`) values (1,'Rifky Zulfikar','L','Parangkusumo 1 No 30 Semarang','rifkyzulfikar92@gmail.com','085641099333','a','a','1'),(4,'Erl','P','Tlogosari','ehf@gmail.com','08562666717','erl','erl','1');
 
 /*Table structure for table `user` */
 
@@ -189,13 +189,14 @@ CREATE TABLE `user` (
   `username` varchar(20) DEFAULT NULL,
   `password` varchar(20) DEFAULT NULL,
   `privilege` varchar(1) DEFAULT NULL,
+  `id_catering` bigint(20) DEFAULT NULL,
   `status` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user` */
 
-insert  into `user`(`id`,`nama`,`username`,`password`,`privilege`,`status`) values (1,'Rifky Zulfikar','admin','admin','1','1');
+insert  into `user`(`id`,`nama`,`username`,`password`,`privilege`,`id_catering`,`status`) values (1,'Rifky Zulfikar','a','a','1',0,'1'),(2,'Erlian HF','b','b','2',4,'1');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

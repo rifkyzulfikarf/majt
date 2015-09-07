@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Sistem Informasi Peminjaman Fasilitas Gedung Masjid Agung Jawa Tengah">
+	<meta name="author"      content="">
+	
+	<title>Sistem Informasi Peminjaman Fasilitas Gedung Masjid Agung Jawa Tengah</title>
+
+	<link rel="shortcut icon" href="../assets/images/gt_favicon.png">
+	
+	<!-- Bootstrap itself -->
+	<link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Fonts -->
+	<link href="../assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href='../assets/css/font.css' rel='stylesheet' type='text/css'>
+	
+	<!-- Custom styles -->
+	<link rel="stylesheet" href="../assets/css/magister.css">
+</head>
+
+<!-- use "theme-invert" class on bright backgrounds, also try "text-shadows" class -->
+<body class="text-shadows">
+
+<nav class="mainmenu">
+	<div class="container">
+		<div class="dropdown">
+			<button type="button" class="navbar-toggle" data-toggle="dropdown"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+			<!-- <a data-toggle="dropdown" href="#">Dropdown trigger</a> -->
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+				<li><a href="#head" class="active">Home</a></li>
+				<li><a href="#login">Login</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+<!-- Main (Home) section -->
+<section class="section" id="head">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1 text-center">	
+
+				<!-- Site Title, your name, HELLO msg, etc. -->
+				<h1 class="title">Admin Sisfo Peminjaman Fasilitas Gedung</h1>
+				<h2 class="subtitle">Masjid Agung Jawa Tengah</h2>
+				
+				<!-- Nice place to describe your site in a sentence or two
+				<p><a href="#" class="btn btn-default btn-lg">Login / Sign Up</a></p> -->
+	
+			</div> <!-- /col -->
+		</div> <!-- /row -->
+	
+	</div>
+</section>
+
+<!-- Second (Login) section -->
+<section class="section" id="login">
+	<div class="container">
+		<div class="row" id="login-box">
+			<div class="col-sm-4 col-sm-offset-4">
+				<div class="thumbnail">
+					<div class="caption">
+						<h2 class="text-center title">Login</h2>
+						<input type="text" id="login-username" class="form-control" placeholder="Username" required autofocus><br>
+						<input type="password" id="login-password" class="form-control" placeholder="Password" required><br>
+						<div class="btn-group btn-block"><a class="btn btn-default dropdown-toggle btn-select" data-toggle="dropdown" data-target="#" id="hak">Pilih Hak Akses <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a>Admin</a></li>
+								<li><a>Catering</a></li>
+							</ul>
+						</div><br><br>
+						<button class="btn btn-lg btn-primary btn-block" id="btn-login">Login</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<div class="alert alert-danger flyover flyover-top" id="alert-failed"></div>
+<div class="alert alert-success flyover flyover-top" id="alert-success"></div>
+
+<!-- Load js libs only when the page is loaded. -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/modernizr.custom.72241.js"></script>
+<!-- Custom template scripts -->
+<script src="js/index.js"></script>
+</body>
+</html>

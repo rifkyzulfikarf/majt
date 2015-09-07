@@ -313,8 +313,6 @@ $(document).ready(function() {
 		var namacatering = $(this).data("namacatering");
 		var tgl = $(this).data("tgl");
 		
-		console.log(idbooking+"-"+idcatering+"-"+namacatering+"-"+tgl);
-		
 		if (confirm('Setuju pesan '+ namacatering +' ?')) {
 			$.ajax({
 				url: "assets/auxs/pelanggan_aux.php",
