@@ -114,6 +114,7 @@ if (isset($_SESSION['majt-id'])) {
 							<th>Gedung</th>
 							<th>Harga</th>
 							<th>Acc</th>
+							<th>Catering</th>
 							<th></th>
 						</tr>
 					</thead>

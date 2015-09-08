@@ -183,10 +183,14 @@
 						} elseif ($rs["acc"] == "1") {
 							$acc = "Ya";
 							
-							if ($resCek = $koneksi->runQuery("SELECT COUNT(id) FROM booking_catering WHERE id_booking = '".$rs["id"]."'")) {
+							if ($resCek = $koneksi->runQuery("SELECT COUNT(`booking_catering`.`id`), `catering`.`nama` FROM `booking_catering` INNER JOIN `catering` 
+							ON (`booking_catering`.`id_catering` = `catering`.`id`) WHERE `booking_catering`.`id_booking` = '".$rs["id"]."'")) {
 								$rsCek = $resCek->fetch_array();
 								if ($rsCek[0] == 0) {
+									$catering = "-";
 									$aksi .= "<a class='btn btn-default btn-sm btn-show-catering' role='button' data-id='".$rs["id"]."' data-tgl='".$rs["tgl"]."'><i class='fa fa-cutlery'></i></a>";
+								} else {
+									$catering = $rsCek[1];
 								}
 							}
 							
@@ -200,6 +204,7 @@
 						array_push($detail, ($rs["waktu"]=="1")?$rs["nama"]." "."Siang":$rs["nama"]." "."Malam");
 						array_push($detail, "Rp ".number_format($rs["harga"], 0, ",", "."));
 						array_push($detail, $acc);
+						array_push($detail, $catering);
 						array_push($detail, $aksi);
 						array_push($collect, $detail);
 						unset($detail);
