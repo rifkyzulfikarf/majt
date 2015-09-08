@@ -18,7 +18,21 @@ $(document).ready(function() {
 			data : function(d) {
 				d.apa = "daftar-pesanan";
 			}
-		}
+		},
+		dom: 'Bfrtip',
+		buttons: [
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ],
+        columnDefs: [ {
+            targets: -1,
+            visible: true
+        } ]
 	});
 	
 	var tabelgedung = $("#tabel-gedung").DataTable({
@@ -30,7 +44,21 @@ $(document).ready(function() {
 			data : function(d) {
 				d.apa = "daftar-gedung";
 			}
-		}
+		},
+		dom: 'Bfrtip',
+		buttons: [
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ],
+        columnDefs: [ {
+            targets: -1,
+            visible: true
+        } ]
 	});
 	
 	var tabelcatering = $("#tabel-catering").DataTable({
@@ -42,7 +70,21 @@ $(document).ready(function() {
 			data : function(d) {
 				d.apa = "daftar-catering";
 			}
-		}
+		},
+		dom: 'Bfrtip',
+		buttons: [
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ],
+        columnDefs: [ {
+            targets: -1,
+            visible: true
+        } ]
 	});
 	
 	var tabelpelanggan = $("#tabel-pelanggan").DataTable({
@@ -54,7 +96,21 @@ $(document).ready(function() {
 			data : function(d) {
 				d.apa = "daftar-pelanggan";
 			}
-		}
+		},
+		dom: 'Bfrtip',
+		buttons: [
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ],
+        columnDefs: [ {
+            targets: -1,
+            visible: true
+        } ]
 	});
 	
 	var dropzoneGedung = $("#dropzone-gedung").dropzone({ 

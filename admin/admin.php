@@ -23,6 +23,7 @@ if (isset($_SESSION['majt-admin-id'])) {
 	<!-- Datatables styles -->
 	<link rel="stylesheet" href="../assets/css/jquery.dataTables.css">
 	<link rel="stylesheet" href="../assets/css/dataTables.bootstrap.css">
+	<link rel="stylesheet" href="../assets/css/buttons.dataTables.min.css">
 	
 	<!-- jQuery UI styles -->
 	<link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
@@ -411,6 +412,9 @@ if (isset($_SESSION['majt-admin-id'])) {
 <script src="../assets/js/fullcalendar.min.js"></script>
 <script src="../assets/js/dataTables.bootstrap.js"></script>
 <script src="../assets/js/jquery.dataTables.min.js"></script>
+<script src="../assets/js/dataTables.buttons.min.js"></script>
+<script src="../assets/js/buttons.print.min.js"></script>
+<script src="../assets/js/buttons.colVis.min.js"></script>
 <script src="../assets/js/dropzone.min.js"></script>
 <!-- Custom template scripts -->
 <script src="js/admin.js"></script>
