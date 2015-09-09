@@ -180,6 +180,7 @@
 						
 						if ($rs["acc"] == "0") {
 							$acc = "Belum";
+							$catering = "-";
 						} elseif ($rs["acc"] == "1") {
 							$acc = "Ya";
 							
@@ -195,6 +196,7 @@
 							}
 							
 						} else {
+							$catering = "-";
 							$acc = "Tidak";
 						}
 					
