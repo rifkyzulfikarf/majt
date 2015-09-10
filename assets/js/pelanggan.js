@@ -352,5 +352,11 @@ $(document).ready(function() {
 		}
 	});
 	
+	$("#tabel-pesanan").on("click", ".btn-print", function(ev){
+		ev.preventDefault();
+		var kode = $(this).data("id");
+		window.open('cetak-bukti.php?kode='+kode, '_blank')
+	});
+	
 });
 

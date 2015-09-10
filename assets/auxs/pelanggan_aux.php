@@ -189,7 +189,7 @@
 								$rsCek = $resCek->fetch_array();
 								if ($rsCek[0] == 0) {
 									$catering = "-";
-									$aksi .= "<a class='btn btn-default btn-sm btn-show-catering' role='button' data-id='".$rs["id"]."' data-tgl='".$rs["tgl"]."'><i class='fa fa-cutlery'></i></a>";
+									$aksi .= "<a class='btn btn-default btn-sm btn-show-catering' role='button' data-id='".$rs["id"]."' data-tgl='".$rs["tgl"]."'><i class='fa fa-cutlery'></i></a> ";
 								} else {
 									$catering = $rsCek[1];
 								}
@@ -199,6 +199,8 @@
 							$catering = "-";
 							$acc = "Tidak";
 						}
+						
+						$aksi .= "<a class='btn btn-default btn-sm btn-print' role='button' data-id='".$rs["id"]."'><i class='fa fa-print'></i></a>";
 					
 						$detail = array();
 						array_push($detail, $rs["tgl"]);
