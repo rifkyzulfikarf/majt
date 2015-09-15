@@ -393,6 +393,45 @@ $(document).ready(function() {
 		$("#id-gedung").val($(this).data("id"));
 	});
 	
+	$("#tabel-gedung").on("click", ".btn-hapus-gedung", function(){
+		var id = $(this).data("id");
+		if (confirm("Hapus data ?")) {
+			$.ajax({
+				url: "auxs/admin_aux.php",
+				method: "POST",
+				cache: false,
+				dataType: "JSON",
+				data: {"apa" : "hapus-gedung", "id" : id},
+				success: function(eve) {
+					if (eve.status) {
+						$('#alert-success').text(eve.msg);
+						if ( !$('#alert-success').is( '.in' ) ) {
+							$('#alert-success').addClass('in');
+
+							setTimeout(function() {
+								$('#alert-success').removeClass('in');
+							}, 1800);
+						}
+						tabelgedung.ajax.reload();
+					} else {
+						$('#alert-failed').text(eve.msg);
+						if ( !$('#alert-failed').is( '.in' ) ) {
+							$('#alert-failed').addClass('in');
+
+							setTimeout(function() {
+								$('#alert-failed').removeClass('in');
+							}, 1800);
+						}
+					}
+				},
+				error: function(err) {
+					console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+					alert("Gagal terkoneksi dengan server..");
+				}
+			});
+		}
+	});
+	
 	$("#catering").on("click", ".btn-show-catering", function(){
 		var mode = $(this).data("mode");
 		
@@ -455,6 +494,45 @@ $(document).ready(function() {
 	$("#tabel-catering").on("click", ".btn-upload-catering", function(){
 		$('#modal-upload-catering').modal('show');
 		$("#id-catering").val($(this).data("id"));
+	});
+	
+	$("#tabel-catering").on("click", ".btn-hapus-catering", function(){
+		var id = $(this).data("id");
+		if (confirm("Hapus data ?")) {
+			$.ajax({
+				url: "auxs/admin_aux.php",
+				method: "POST",
+				cache: false,
+				dataType: "JSON",
+				data: {"apa" : "hapus-catering", "id" : id},
+				success: function(eve) {
+					if (eve.status) {
+						$('#alert-success').text(eve.msg);
+						if ( !$('#alert-success').is( '.in' ) ) {
+							$('#alert-success').addClass('in');
+
+							setTimeout(function() {
+								$('#alert-success').removeClass('in');
+							}, 1800);
+						}
+						tabelcatering.ajax.reload();
+					} else {
+						$('#alert-failed').text(eve.msg);
+						if ( !$('#alert-failed').is( '.in' ) ) {
+							$('#alert-failed').addClass('in');
+
+							setTimeout(function() {
+								$('#alert-failed').removeClass('in');
+							}, 1800);
+						}
+					}
+				},
+				error: function(err) {
+					console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+					alert("Gagal terkoneksi dengan server..");
+				}
+			});
+		}
 	});
 	
 	$("#pelanggan").on("click", ".btn-show-pelanggan", function(){

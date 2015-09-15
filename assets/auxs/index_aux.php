@@ -71,14 +71,15 @@
 				$events = array();
 				
 				//Lihat dulu jumlah gedung yang ada
-				if ($result = $koneksi->runQuery("SELECT COUNT(id) FROM gedung")) {
+				if ($result = $koneksi->runQuery("SELECT COUNT(id) FROM gedung WHERE hapus = '0'")) {
 					$rs = $result->fetch_array();
 					$jumlahGedung = $rs[0];
 				}
 				
 				$jumlahGedung = $jumlahGedung * 2;
 				
-				if ($result = $koneksi->runQuery("SELECT tgl, COUNT(id) FROM booking WHERE acc <> '2' GROUP BY tgl ASC")) {
+				if ($result = $koneksi->runQuery("SELECT `booking`.`tgl`, COUNT(`booking`.`id`) FROM `booking` INNER JOIN `gedung` ON (`booking`.`id_gedung` = `gedung`.`id`) 
+				WHERE `booking`.`acc` <> '2' AND `gedung`.`hapus` = '0' GROUP BY `booking`.`tgl` ASC;")) {
 					while ($rs = $result->fetch_array()) {
 						$e = array();
 						
@@ -92,10 +93,11 @@
 						} else if ($rs[1] < $jumlahGedung) {
 							$e['title'] = ($jumlahGedung - $rs[1])." ruangan tersedia.";
 							$e['color'] = "blue";
+						}  else {
+							$e['title'] = "Penuh";
+							$e['color'] = "red";
 						}
 						
-						
-							
 						array_push($events, $e);
 					}
 				}

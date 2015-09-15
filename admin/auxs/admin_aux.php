@@ -66,12 +66,13 @@
 				$koneksi = new koneksi();
 				$collect = array();
 				
-				$query = "SELECT * FROM gedung;";
+				$query = "SELECT * FROM gedung WHERE hapus = '0';";
 				
 				if ($result = $koneksi->runQuery($query)) {
 					while ($rs = $result->fetch_array()) {
 						$aksi = "<a class='btn btn-default btn-sm btn-show-gedung' role='button' data-id='".$rs["id"]."' data-mode='ubah'><i class='fa fa-pencil'></i></a> 
-								<a class='btn btn-default btn-sm btn-upload-gedung' role='button' data-id='".$rs["id"]."'><i class='fa fa-upload'></i></a>";
+								<a class='btn btn-default btn-sm btn-upload-gedung' role='button' data-id='".$rs["id"]."'><i class='fa fa-upload'></i></a> 
+								<a class='btn btn-default btn-sm btn-hapus-gedung' role='button' data-id='".$rs["id"]."'><i class='fa fa-trash-o'></i></a>";
 					
 						$detail = array();
 						array_push($detail, $rs["nama"]);
@@ -91,12 +92,13 @@
 				$koneksi = new koneksi();
 				$collect = array();
 				
-				$query = "SELECT * FROM catering;";
+				$query = "SELECT * FROM catering WHERE hapus = '0';";
 				
 				if ($result = $koneksi->runQuery($query)) {
 					while ($rs = $result->fetch_array()) {
 						$aksi = "<a class='btn btn-default btn-sm btn-show-catering' role='button' data-id='".$rs["id"]."' data-mode='ubah'><i class='fa fa-pencil'></i></a> 
-								<a class='btn btn-default btn-sm btn-upload-catering' role='button' data-id='".$rs["id"]."'><i class='fa fa-upload'></i></a>";
+								<a class='btn btn-default btn-sm btn-upload-catering' role='button' data-id='".$rs["id"]."'><i class='fa fa-upload'></i></a> 
+								<a class='btn btn-default btn-sm btn-hapus-catering' role='button' data-id='".$rs["id"]."'><i class='fa fa-trash-o'></i></a>";
 					
 						$detail = array();
 						array_push($detail, $rs["nama"]);
@@ -277,6 +279,29 @@
 				}
 				echo json_encode($arr);
 				break;
+			case "hapus-gedung":
+				$arr = array();
+				if (isset($_POST['id']) && $_POST['id'] != "") {
+					include "../inc/blob.php";
+					
+					$koneksi = new koneksi();
+					$id = $_POST['id'];
+					
+					$query = "UPDATE gedung SET hapus = '1' WHERE id = '$id'";
+					
+					if ($result = $koneksi->runQuery($query)) {						
+						$arr['status']=TRUE;
+						$arr['msg']="Hapus data berhasil..";
+					} else {
+						$arr['status']=FALSE;
+						$arr['msg']="Hapus data gagal.. Kesalahan pada sistem..";
+					}
+				} else {
+					$arr['status']=FALSE;
+					$arr['msg']="Harap isi data dengan lengkap..";
+				}
+				echo json_encode($arr);
+				break;
 			case "simpan-catering":
 				$arr = array();
 				if (isset($_POST['nama']) && $_POST['nama'] != "" && isset($_POST['alamat']) && $_POST['alamat'] != "" && 
@@ -328,6 +353,29 @@
 					} else {
 						$arr['status']=FALSE;
 						$arr['msg']="Simpan data gagal.. Kesalahan pada sistem..";
+					}
+				} else {
+					$arr['status']=FALSE;
+					$arr['msg']="Harap isi data dengan lengkap..";
+				}
+				echo json_encode($arr);
+				break;
+			case "hapus-catering":
+				$arr = array();
+				if (isset($_POST['id']) && $_POST['id'] != "") {
+					include "../inc/blob.php";
+					
+					$koneksi = new koneksi();
+					$id = $_POST['id'];
+					
+					$query = "UPDATE catering SET hapus = '1' WHERE id = '$id'";
+					
+					if ($result = $koneksi->runQuery($query)) {						
+						$arr['status']=TRUE;
+						$arr['msg']="Hapus data berhasil..";
+					} else {
+						$arr['status']=FALSE;
+						$arr['msg']="Hapus data gagal.. Kesalahan pada sistem..";
 					}
 				} else {
 					$arr['status']=FALSE;
